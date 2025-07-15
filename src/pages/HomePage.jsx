@@ -9,11 +9,11 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 
 // Import Swiper styles
 import 'swiper/css';
-import 'swiper/css/pagination'; // If you want pagination dots
-import 'swiper/css/navigation'; // If you want navigation arrows
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
 
 // import required modules
-import { Pagination, Navigation, Autoplay } from 'swiper/modules'; // Import modules like Pagination, Navigation, Autoplay
+import { Pagination, Navigation, Autoplay } from 'swiper/modules';
 
 function HomePage() {
     const [states, setStates] = useState([]);
@@ -31,9 +31,10 @@ function HomePage() {
             try {
                 const data = await getStates();
                 setStates(data);
+                console.log('Fetched states in useEffect (should be array):', data); // This log is already there, good!
             } catch (err) {
                 setError('Failed to load states. Please try again later.');
-                console.error(err);
+                console.error('Error fetching states in HomePage useEffect:', err);
             } finally {
                 setLoading(false);
             }
@@ -49,10 +50,10 @@ function HomePage() {
                 try {
                     const data = await getCities(selectedState);
                     setCities(data);
-                    setSelectedCity(''); // Reset city when state changes
+                    setSelectedCity('');
                 } catch (err) {
                     setError(`Failed to load cities for ${selectedState}.`);
-                    console.error(err);
+                    console.error('Error fetching cities in HomePage useEffect:', err);
                 } finally {
                     setLoading(false);
                 }
@@ -73,7 +74,6 @@ function HomePage() {
         }
     };
 
-    // Dummy data for the carousel (replace with actual data if available from API for featured items)
     const carouselItems = [
         { id: 1, title: 'Expert Doctors', description: 'Find highly qualified specialists.', image: 'https://placehold.co/300x200/ADD8E6/000000?text=Doctor' },
         { id: 2, title: 'Top Hospitals', description: 'Access leading medical facilities.', image: 'https://placehold.co/300x200/90EE90/000000?text=Hospital' },
@@ -91,6 +91,8 @@ function HomePage() {
                 <div className="form-group">
                     <label htmlFor="state-select">Select State:</label>
                     <div id="state" className="dropdown-wrapper">
+                        {/* NEW CONSOLE LOG HERE */}
+                        {console.log('States array before rendering options:', states)}
                         <select
                             id="state-select"
                             value={selectedState}
@@ -131,20 +133,19 @@ function HomePage() {
                 </button>
             </form>
 
-            {/* Swiper carousel section */}
             <div className="carousel-section">
                 <h2>Featured Services</h2>
                 <Swiper
                     modules={[Pagination, Navigation, Autoplay]}
                     spaceBetween={30}
                     slidesPerView={1}
-                    navigation={true} // Enable navigation arrows
-                    pagination={{ clickable: true }} // Enable clickable pagination dots
+                    navigation={true}
+                    pagination={{ clickable: true }}
                     autoplay={{
                         delay: 3000,
                         disableOnInteraction: false,
                     }}
-                    loop={true} // Enable looping
+                    loop={true}
                     breakpoints={{
                         640: {
                             slidesPerView: 2,

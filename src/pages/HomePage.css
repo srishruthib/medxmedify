@@ -1,0 +1,108 @@
+.home-page-container {
+    padding: 20px;
+    text-align: center;
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.home-page-container .page-title {
+    color: #333;
+    margin-bottom: 30px;
+    font-size: 2.5em;
+}
+
+.search-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.form-group {
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #555;
+}
+
+.dropdown-wrapper select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1.1em;
+    background-color: #fff;
+    cursor: pointer;
+    -webkit-appearance: none;
+    /* Remove default arrow */
+    -moz-appearance: none;
+    appearance: none;
+    /* Custom arrow for dropdown */
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23007bff%22%20d%3D%22M287%2C197.979L146.202%2C57.182c-4.756-4.756-12.484-4.756-17.24%2C0L5.438%2C197.979c-4.756%2C4.756-4.756%2C12.484%2C0%2C17.24l16.12%2C16.12c4.756%2C4.756%2C12.484%2C4.756%2C17.24%2C0l107.41-107.41l107.41%2C107.41c4.756%2C4.756%2C12.484%2C4.756%2C17.24%2C0l16.12-16.12C291.756%2C210.463%2C291.756%2C202.735%2C287%2C197.979z%22%2F%3E%3C%2Fsvg%3E');
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+    background-size: 12px;
+}
+
+.search-form button {
+    padding: 12px 25px;
+    font-size: 1.2em;
+    border-radius: 8px;
+    background-color: #28a745;
+    /* Green search button */
+}
+
+.search-form button:hover {
+    background-color: #218838;
+}
+
+.error-message {
+    color: #dc3545;
+    /* Red for errors */
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+.carousel-section {
+    margin-top: 50px;
+    text-align: left;
+}
+
+.carousel-section h2 {
+    color: #333;
+    margin-bottom: 20px;
+    font-size: 2em;
+}
+
+/* Responsive adjustments for HomePage */
+@media (max-width: 768px) {
+    .home-page-container {
+        padding: 15px;
+        margin: 10px auto;
+        box-shadow: none;
+    }
+
+    .home-page-container .page-title {
+        font-size: 2em;
+    }
+
+    .search-form {
+        gap: 15px;
+    }
+
+    .dropdown-wrapper select,
+    .search-form button {
+        padding: 10px;
+        font-size: 1em;
+    }
+}

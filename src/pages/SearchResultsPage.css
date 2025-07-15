@@ -13,16 +13,26 @@
     margin-bottom: 30px;
     font-size: 2em;
     text-transform: lowercase;
-    /* Ensure city is lowercase as per requirement */
 }
 
-.medical-centers-list {
+/* Changed from .medical-centers-list to ul.medical-centers-list */
+ul.medical-centers-list {
+    list-style: none;
+    /* Remove default bullet points */
+    margin: 0;
+    padding: 0;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 20px;
     justify-content: center;
 }
 
+/* New style for the li wrapper */
+.medical-center-item {
+    /* No specific styles needed here, as the card styles apply to the div inside */
+}
+
+/* The card styling now applies to the div inside the li */
 .medical-center-card {
     background-color: #fff;
     border: 1px solid #eee;
@@ -33,6 +43,10 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    height: 100%;
+    /* Ensure cards in grid have equal height */
+    box-sizing: border-box;
+    /* Include padding/border in height */
 }
 
 .medical-center-card h3 {
@@ -58,6 +72,17 @@
     background-color: #218838;
 }
 
+.success-message {
+    color: #155724;
+    /* Dark green */
+    background-color: #d4edda;
+    border: 1px solid #c3e6cb;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
 /* Responsive adjustments for SearchResultsPage */
 @media (max-width: 768px) {
     .search-results-container {
@@ -70,20 +95,9 @@
         font-size: 1.5em;
     }
 
-    .medical-centers-list {
+    ul.medical-centers-list {
+        /* Target the ul directly */
         grid-template-columns: 1fr;
         /* Single column on mobile */
     }
-}
-
-/* --- ADD THIS NEW CSS RULE --- */
-.success-message {
-    color: #155724;
-    /* Dark green */
-    background-color: #d4edda;
-    border: 1px solid #c3e6cb;
-    padding: 10px;
-    border-radius: 5px;
-    margin-bottom: 15px;
-    text-align: center;
 }

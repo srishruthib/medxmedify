@@ -77,23 +77,27 @@ function SearchResultsPage() {
                     <h1 className="results-heading">
                         {medicalCenters.length} medical centers available in {city.toLowerCase()}
                     </h1>
-                    <div className="medical-centers-list">
+                    {/* Change this div to an unordered list (ul) */}
+                    <ul className="medical-centers-list">
                         {medicalCenters.map((center, index) => (
-                            <div key={index} className="medical-center-card">
-                                {/* CRUCIAL: h3 tag for hospital name */}
-                                <h3>{center['Hospital Name']}</h3>
-                                <p>Address: {center['Address']}, {center['City']}, {center['State']} {center['ZIP Code']}</p>
-                                <p>Rating: {center['Overall Rating']} / 5</p>
-                                {/* Updated button to open the modal and pass the center data */}
-                                <button
-                                    className="book-button"
-                                    onClick={() => handleOpenBookingModal(center)}
-                                >
-                                    Book FREE Center Visit
-                                </button>
-                            </div>
+                            // CRUCIAL: Wrap each medical center card in an <li> tag
+                            <li key={index} className="medical-center-item"> {/* Added a new class for li styling */}
+                                <div className="medical-center-card">
+                                    {/* CRUCIAL: h3 tag for hospital name */}
+                                    <h3>{center['Hospital Name']}</h3>
+                                    <p>Address: {center['Address']}, {center['City']}, {center['State']} {center['ZIP Code']}</p>
+                                    <p>Rating: {center['Overall Rating']} / 5</p>
+                                    {/* Updated button to open the modal and pass the center data */}
+                                    <button
+                                        className="book-button"
+                                        onClick={() => handleOpenBookingModal(center)}
+                                    >
+                                        Book FREE Center Visit
+                                    </button>
+                                </div>
+                            </li>
                         ))}
-                    </div>
+                    </ul> {/* Close the unordered list */}
                 </>
             ) : (
                 // Display message if no centers found and not loading/error

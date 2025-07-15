@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import './BookingModal.css'; // Import CSS for the modal
+import './BookingModal.css';
 
 const BookingModal = ({ isOpen, onClose, medicalCenter, onBookAppointment }) => {
     const [selectedDate, setSelectedDate] = useState('');
     const [selectedTime, setSelectedTime] = useState('');
     const [error, setError] = useState(null);
 
-    // Reset state when modal opens/closes or medicalCenter changes
     useEffect(() => {
         if (isOpen) {
             setSelectedDate('');
@@ -15,14 +14,13 @@ const BookingModal = ({ isOpen, onClose, medicalCenter, onBookAppointment }) => 
         }
     }, [isOpen, medicalCenter]);
 
-    if (!isOpen) return null; // Don't render if not open
+    if (!isOpen) return null;
 
     const getAvailableDates = () => {
         const dates = [];
         const today = new Date();
-        today.setHours(0, 0, 0, 0); // Normalize to start of day
-
-        for (let i = 0; i < 7; i++) { // Within a week in advance (7 days including today)
+        today.setHours(0, 0, 0, 0);
+        for (let i = 0; i < 7; i++) {
             const date = new Date(today);
             date.setDate(today.getDate() + i);
             dates.push(date);
@@ -32,7 +30,6 @@ const BookingModal = ({ isOpen, onClose, medicalCenter, onBookAppointment }) => 
 
     const getAvailableTimeSlots = () => {
         const slots = [];
-        // Generate time slots from 9 AM to 5 PM, every 30 minutes
         for (let hour = 9; hour <= 17; hour++) {
             for (let minute = 0; minute < 60; minute += 30) {
                 const time = `${hour % 12 === 0 ? 12 : hour % 12}:${minute === 0 ? '00' : minute} ${hour < 12 ? 'AM' : 'PM'}`;
@@ -48,7 +45,6 @@ const BookingModal = ({ isOpen, onClose, medicalCenter, onBookAppointment }) => 
             return;
         }
 
-        // Prepare booking data
         const bookingData = {
             hospitalName: medicalCenter['Hospital Name'],
             address: medicalCenter['Address'],
@@ -59,8 +55,8 @@ const BookingModal = ({ isOpen, onClose, medicalCenter, onBookAppointment }) => 
             appointmentTime: selectedTime,
         };
 
-        onBookAppointment(bookingData); // Call parent function to save booking
-        onClose(); // Close modal after booking
+        onBookAppointment(bookingData);
+        onClose();
     };
 
     const dates = getAvailableDates();
@@ -83,7 +79,7 @@ const BookingModal = ({ isOpen, onClose, medicalCenter, onBookAppointment }) => 
                     >
                         <option value="">-- Select Date --</option>
                         {dates.map((dateObj) => {
-                            const dateString = dateObj.toISOString().split('T')[0]; // YYYY-MM-DD
+                            const dateString = dateObj.toISOString().split('T')[0];
                             const displayDate = dateObj.toLocaleDateString('en-US', {
                                 weekday: 'short', month: 'short', day: 'numeric'
                             });
@@ -106,7 +102,6 @@ const BookingModal = ({ isOpen, onClose, medicalCenter, onBookAppointment }) => 
                         disabled={!selectedDate}
                     >
                         <option value="">-- Select Time --</option>
-                        {/* Display time of day labels */}
                         {selectedDate && (
                             <>
                                 <optgroup label="Morning">
@@ -127,10 +122,9 @@ const BookingModal = ({ isOpen, onClose, medicalCenter, onBookAppointment }) => 
                             </>
                         )}
                     </select>
-                    {/* CRUCIAL: Use <p> tags for displaying "Today", "Morning", "Afternoon", "Evening" */}
                     {selectedDate && (
                         <div className="time-of-day-labels">
-                            <p>Today</p> {/* This label is always shown if a date is selected, not tied to specific time slots */}
+                            <p>Today</p>
                             <p>Morning</p>
                             <p>Afternoon</p>
                             <p>Evening</p>
@@ -138,7 +132,11 @@ const BookingModal = ({ isOpen, onClose, medicalCenter, onBookAppointment }) => 
                     )}
                 </div>
 
-                <button onClick={handleBooking} disabled={!selectedDate || !selectedTime}>
+                <button
+                    data-testid="confirm-booking"
+                    onClick={handleBooking}
+                    disabled={!selectedDate || !selectedTime}
+                >
                     Confirm Booking
                 </button>
             </div>

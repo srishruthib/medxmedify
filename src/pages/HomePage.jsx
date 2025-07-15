@@ -31,7 +31,7 @@ function HomePage() {
             try {
                 const data = await getStates();
                 setStates(data);
-                console.log('Fetched states in useEffect (should be array):', data); // This log is already there, good!
+                console.log('Fetched states in useEffect (should be array):', data);
             } catch (err) {
                 setError('Failed to load states. Please try again later.');
                 console.error('Error fetching states in HomePage useEffect:', err);
@@ -91,17 +91,17 @@ function HomePage() {
                 <div className="form-group">
                     <label htmlFor="state-select">Select State:</label>
                     <div id="state" className="dropdown-wrapper">
-                        {/* NEW CONSOLE LOG HERE */}
-                        {console.log('States array before rendering options:', states)}
+                        {console.log('Attempting to render state select. States array:', states, 'Loading:', loading)}
                         <select
                             id="state-select"
                             value={selectedState}
                             onChange={(e) => setSelectedState(e.target.value)}
                             disabled={loading}
+                            data-testid="state-select-dropdown" {/* Added data-testid */}
                         >
                             <option value="">-- Select State --</option>
                             {states.map((state) => (
-                                <option key={state} value={state}>
+                                <option key={state} value={state}> {/* key={state} is fine as states are unique strings */}
                                     {state}
                                 </option>
                             ))}
@@ -117,6 +117,7 @@ function HomePage() {
                             value={selectedCity}
                             onChange={(e) => setSelectedCity(e.target.value)}
                             disabled={loading || !selectedState}
+                            data-testid="city-select-dropdown" {/* Added data-testid */}
                         >
                             <option value="">-- Select City --</option>
                             {cities.map((city) => (

@@ -91,17 +91,17 @@ function HomePage() {
                 <div className="form-group">
                     <label htmlFor="state-select">Select State:</label>
                     <div id="state" className="dropdown-wrapper">
-                        {console.log('Attempting to render state select. States array:', states, 'Loading:', loading)}
+                        {/* Removed the inline console.log that might have caused syntax issues */}
                         <select
                             id="state-select"
                             value={selectedState}
                             onChange={(e) => setSelectedState(e.target.value)}
                             disabled={loading}
-                            data-testid="state-select-dropdown" {/* Added data-testid */}
+                            data-testid="state-select-dropdown"
                         >
                             <option value="">-- Select State --</option>
                             {states.map((state) => (
-                                <option key={state} value={state}> {/* key={state} is fine as states are unique strings */}
+                                <option key={state} value={state}>
                                     {state}
                                 </option>
                             ))}
@@ -117,7 +117,7 @@ function HomePage() {
                             value={selectedCity}
                             onChange={(e) => setSelectedCity(e.target.value)}
                             disabled={loading || !selectedState}
-                            data-testid="city-select-dropdown" {/* Added data-testid */}
+                            data-testid="city-select-dropdown"
                         >
                             <option value="">-- Select City --</option>
                             {cities.map((city) => (
